@@ -18,29 +18,59 @@
    - Would you like to use App Router? (recommended) ... No / **Yes**
    - Would you like to customize the default import alias (@/*)? » No / **Yes**
    - What import alias would you like configured? ... **@/**\*   
-  
-  ## Clone the repository
-  1. Go to [GitHub](https://github.com/)
-  2. Create new Reposity **VideoMedia** 
-     - Go to **Repositories**
-     - Then hit in **New** button, usually green color.
-     - Type **VideoMedia** in the **Repository name** field.
-     - Hit in **Create repository** button.
-     - Hit in **Code** button.
-     - Copy the **HTTPS** link.
-  3. Go to Visual Studio Code and open the terminal.
-     - Type `git init`
-     - Then `git add .`
-     - After `git commit -m "First commit"`
-     - Now `C:\repos\videoMedia> git remote add origin https://github.com/svei00/videoMedia.git` where **https://github.com/svei00/videoMedia.git** is the name of your repository
-     - Now `C:\repos\videoMedia> git push -u origin master`
+4. After the installation is done, you can open the folder where the project is.
+   - In terminal type `cd videomedia`
+   - Now you can run the app.
+     * Via **npm** `npm run dev`
+     * via **yarn** `yarn run dev`
+5. After the app is running, you can open the app in the browser.
+   - Type `http://localhost:3000` in the browser.
+6. Now you can start coding your app by going to **/src/app** and open file **page.tsx**.
+   - You can delete all the previous code.
+   - By using the snippet RFC (React Funtional Component) code Home:
+     `import React from 'react'
 
-## Installing the dependencies
-1. Go to the terminal and type `yarn add @next-auth/jwt @next-auth/react axios bcryptjs dotenv express jsonwebtoken lodash mongoose react-icons uuid`
-2. Go to the terminal and type `yarn add -D eslint prettier eslint-config-prettier eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks`
+         export default function Home() {
+            return (
+               <div>Home</div>
+            )
+         }
+         `
+   - Go to **globals.css** css file and delete the unnecesary code, just leave the:
+     `
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
+     ` 
 
-## Installing the dependencies
-1. Go to the terminal and type `yarn dev` 
+## Clone the repository
+1. Go to [GitHub](https://github.com/)
+2. Create new Reposity **VideoMedia** 
+   - Go to **Repositories**
+   - Then hit in **New** button, usually green color.
+   - Type **VideoMedia** in the **Repository name** field.
+   - Hit in **Create repository** button.
+   - Hit in **Code** button.
+   - Copy the **HTTPS** link.
+3. Go to Visual Studio Code and open the terminal.
+   - Type `git init`
+   - Then `git add .`
+   - After `git commit -m "Setting up NextJS"`
+   - Type `git branch -M main`
+   - Now `git remote add origin https://github.com/svei00/videoMedia.git` where **https://github.com/svei00/videoMedia.git** is the name of your repository
+   - Finally `git push -u origin main`
+
+### Useful Extensions
+- ES7+ React/Redux/React-Native snippets.
+- Auto Rename Tag.
+- Multiple cursor case preserve.
+- Prettier - Code formatter.
+- Tailwind CSS IntelliSense.
 
 
-  23:06
+# Bibliography
+- [Sahan imDB Clone](https://www.youtube.com/watch?v=69vpmZgDeN8) 
+- [NextJS](https://nextjs.org/docs/getting-started/installation)
+- [TMDB](https://www.themoviedb.org/?language=en-US)
+
+  29:00
