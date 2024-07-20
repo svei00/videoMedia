@@ -76,10 +76,72 @@
 - Prettier - Code formatter.
 - Tailwind CSS IntelliSense.
 
+## Create the Header Section.
+1. Go to **/src/** and create a new folder **components**.
+2. Inside the **components** folder create a new file **Header.tsx**.
+3. In the **Header.tsx** file, create a React Functional Component with the RFC snippet:
+   `
+   import React from 'react'
+
+   export default function Header() {
+      return (
+         <div>Header</div>
+      )
+   }
+   `
+4. Now go to **/src/app/** folder and open **layout.tsx** file.
+   - In the **RootLayout** function inside the *<body>* tag and before the *{children}* add:
+     `
+      <body className={inter.className}>
+         <Header />
+         {children}
+      </body>
+     `
+   - If not auto import do it manually: `import Header from "@/components/Header";`
+   - Now you can see the header in the browser.
+5. In **/src/components** and create file **MenuItem.tsx**
+   - With RFC snippet (React Funtional Component) create:
+     `
+      import React from 'react'
+
+      export default function MenuItem() {
+         return (
+            <div>MenuItem</div>
+         )
+      }
+     `
+6. Install **ReactIcons** to populate the MenuItems inside the Header.
+   - Via **npm** `npm install react-icons`
+   - Via **yarn** `yarn add react-icons`
+7. Now come back to **Header.tsx** and start working in the Menu.
+   - In the second dive around line of code 10 add: `<MenuItem title="home" address="/" Icon={AiFillHome}>`
+     * Where the props are: title, address and Icon.
+     * ALT + SHIFT + Down Arrow to duplicate the line.
+     * If not auto import *AiFillHome* do it manually: `import { AiFillHome } from 'react-icons/ai';`
+     * Do the same with `<MenuItem title="about" address="/about" Icon={BsFillInfoCircleFill}>` and import the Icon manually if it won't do automatically.
+   - Now you can see the MenuItems in the browser.
+  
+    
+
+
+
 
 # Bibliography
 - [Sahan Ghavidel imDB Clone](https://www.youtube.com/watch?v=69vpmZgDeN8) 
 - [NextJS](https://nextjs.org/docs/getting-started/installation)
 - [TMDB](https://www.themoviedb.org/?language=en-US)
+
+### Shortcuts Glosary.
+- **CTRL + /** - Comment/Uncomment
+- **CTRL + SHIFT + P** - Open Command Palette
+- **CTRL + P** - Open File
+- **CTRL + SHIFT + N** - New File
+- **CTRL + SHIFT + W** - Close File
+- **CTRL + SHIFT + F** - Find in Files
+- **CTRL + SHIFT + G** - Find in Files
+- **CTRL + SHIFT + V** - Open Recent
+- **CTRL + SHIFT + E** - Open Recent
+- **CTRL + SHIFT + O** - Open Folder
+- **ALT + SHIFT + Down Arrow** to duplicate the line.
 
   29:00
