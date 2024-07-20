@@ -3,7 +3,7 @@
 ## Setting up the App.
 1. Check nodejs version. You should have node v18 or higer.
    - Open terminal an type: **node -v** 
-2. Go to [NextJX](https://nextjs.org/) web page also you can search for in in [Google](www.google.com).
+2. Go to [NextJS](https://nextjs.org/) web page also you can search for in in [Google](www.google.com).
    - Hit in the **Get Started** button.
    - Then on the top left hit in **Installation** hyperlink
    -  Install the NextJS app.
