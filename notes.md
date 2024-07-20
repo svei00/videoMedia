@@ -42,6 +42,11 @@
       @tailwind components;
       @tailwind utilities;
      ` 
+7. Change the **metadata** in the **layout.tsx** file.
+   - Go to **/src/app**
+   - Change export const metadata::
+     * `title: "Video Media",`
+     * `description: "This is a movie and series database",`
 
 ## Clone the repository
 1. Go to [GitHub](https://github.com/)
@@ -60,6 +65,10 @@
    - Now `git remote add origin https://github.com/svei00/videoMedia.git` where **https://github.com/svei00/videoMedia.git** is the name of your repository
    - Finally `git push -u origin main`
 
+## Fixing the LF (Line Feed) and CRLF(Carriage Return Line Feed).
+1. Change the Global Configuration: `git config --global core.autocrlf true`
+2. Local Configuration (for a specific repository): `git config core.autocrlf true`
+
 ### Useful Extensions
 - ES7+ React/Redux/React-Native snippets.
 - Auto Rename Tag.
@@ -69,7 +78,7 @@
 
 
 # Bibliography
-- [Sahan imDB Clone](https://www.youtube.com/watch?v=69vpmZgDeN8) 
+- [Sahan Ghavidel imDB Clone](https://www.youtube.com/watch?v=69vpmZgDeN8) 
 - [NextJS](https://nextjs.org/docs/getting-started/installation)
 - [TMDB](https://www.themoviedb.org/?language=en-US)
 
