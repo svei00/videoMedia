@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 import {iconType} from 'react-icons'
 
@@ -10,10 +11,10 @@ export interface MenuItemProps {
 const MenuItem = ({title, address, Icon}: MenuItemProps): JSX.Element => {
   // const {title, address, Icon} = props
   return (
-    <div>
-        <Icon />
-        <p>{title}</p>
-    </div>
+    <Link href={address} className='hover:text-purple-600'>
+        <Icon className="text-2xl sm:hidden"/>
+        <p className='capitalize hidden sm:inline text-sm font-semibold'>{title}</p>
+    </Link>
   )
 }
 

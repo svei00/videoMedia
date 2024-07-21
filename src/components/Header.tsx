@@ -12,9 +12,9 @@ const Header = ({}:HeaderProps): JSX.Element => {
   
     return (
         <div>
-          <div className=''>
-            <MenuItem title="Home" address="/" Icon={AiFillHome} />
-            <MenuItem title="About" address="/about" Icon={BsFillInfoCircleFill} />
+          <div className='flex gap-4'>
+            <MenuItem title="home" address="/" Icon={AiFillHome} />
+            <MenuItem title="about" address="/about" Icon={BsFillInfoCircleFill} />
           </div>
     
           <div className=''>
