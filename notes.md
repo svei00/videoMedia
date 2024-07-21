@@ -120,8 +120,64 @@
      * If not auto import *AiFillHome* do it manually: `import { AiFillHome } from 'react-icons/ai';`
      * Do the same with `<MenuItem title="about" address="/about" Icon={BsFillInfoCircleFill}>` and import the Icon manually if it won't do automatically.
    - Now you can see the MenuItems in the browser.
-  
-    
+8. At the moment the MenuItem should look like this:
+   `
+      import Link from 'next/link'
+      import React from 'react'
+      import {iconType} from 'react-icons'
+
+      export interface MenuItemProps {
+         title: string,
+         address: string,
+         Icon: iconType
+      }
+
+      const MenuItem = ({title, address, Icon}: MenuItemProps): JSX.Element => {
+      // const {title, address, Icon} = props
+      return (
+         <Link href={address} className='hover:text-purple-600'>
+            <Icon className="text-2xl sm:hidden"/>
+            <p className='capitalize hidden sm:inline text-sm font-semibold'>{title}</p>
+         </Link>
+         )
+      }
+
+      export default MenuItem;
+   `
+9. While the Home.tsx** Should look like this:
+   `
+      import React from 'react'
+      import MenuItem from './MenuItem'
+      import { AiFillHome } from 'react-icons/ai'
+      import { BsFillInfoCircleFill } from 'react-icons/bs'
+      import Link from 'next/link';
+
+      interface HeaderProps {
+
+      }
+
+      const Header = ({}:HeaderProps): JSX.Element => {
+      
+         return (
+            <div className='flex justify-between items-center p-3 max-w-6xl mx-auto'>
+               <div className='flex gap-4'>
+                  <MenuItem title="home" address="/" Icon={AiFillHome} />
+                  <MenuItem title="about" address="/about" Icon={BsFillInfoCircleFill} />
+               </div>
+         
+               <Link href={'/'} className='flex gap-1 items-center'>
+                  <span className='text-2xl text-gray-900 font bold bg bg-purple-700 py-1 px-2 rounded-lg'>VideoMedia</span>
+                  <span className='text-xl hidden sm:inline'>Collection</span>
+               </Link>
+            </div>
+            );
+         };
+         
+         export default Header;
+   `
+
+
+## Add Dark Mode.    
 
 
 
