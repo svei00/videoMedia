@@ -76,6 +76,28 @@
 - Prettier - Code formatter.
 - Tailwind CSS IntelliSense.
 
+## Defining the Color Pallette(Theming).
+1. Go to **/** folder and open the **tailwind.config.js** file.
+2. In the **theme** section add the **colors** section to add the design tokens inside the extend add: 
+   `
+   colors: { primary: {
+                  light: "#BF00FF", // Electric Purple
+                  Default: "#7C3AED", // Purple
+                  dark: "#0D0D0D",
+                  gold: "#D4C19C",
+                  text: "#C0C0C0"
+                }, 
+                secondary: {
+                  light: "#7DF9FF", // Electric Blue 
+                  Default: "#BDBDBD",
+                  dark: "#828282"}, 
+                tertiary: {
+                  light: "#39FF14", // Neon Green
+                  Default: "#E0E0E0",
+                  dark: "#C4C4C4"} },
+                accent: "#FF00FF", // Neon Pink
+   `
+
 ## Create the Header Section.
 1. Go to **/src/** and create a new folder **components**.
 2. Inside the **components** folder create a new file **Header.tsx**.
@@ -120,7 +142,7 @@
      * If not auto import *AiFillHome* do it manually: `import { AiFillHome } from 'react-icons/ai';`
      * Do the same with `<MenuItem title="about" address="/about" Icon={BsFillInfoCircleFill}>` and import the Icon manually if it won't do automatically.
    - Now you can see the MenuItems in the browser.
-8. At the moment the MenuItem should look like this:
+8. At the moment the **MenuItem.tsx** should look like this:
    `
       import Link from 'next/link'
       import React from 'react'
@@ -200,4 +222,4 @@
 - **CTRL + SHIFT + O** - Open Folder
 - **ALT + SHIFT + Down Arrow** to duplicate the line.
 
-  29:00
+  

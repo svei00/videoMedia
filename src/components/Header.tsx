@@ -19,7 +19,7 @@ const Header = ({}:HeaderProps): JSX.Element => {
           </div>
     
           <Link href={'/'} className='flex gap-1 items-center'>
-            <span className='text-2xl text-gray-900 font bold bg bg-purple-700 py-1 px-2 rounded-lg'>VideoMedia</span>
+            <span className='text-2xl text-primary-text font bold bg bg-primary-light py-1 px-2 rounded-lg'>VideoMedia</span>
             <span className='text-xl hidden sm:inline'>Collection</span>
           </Link>
         </div>

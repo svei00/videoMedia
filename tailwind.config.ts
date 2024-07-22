@@ -8,6 +8,22 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: { primary: {
+                  light: "#BF00FF", // Electric Purple
+                  Default: "#7C3AED", // Purple
+                  dark: "#0D0D0D",
+                  gold: "#D4C19C",
+                  text: "#C0C0C0"
+                }, 
+                secondary: {
+                  light: "#7DF9FF", // Electric Blue 
+                  Default: "#BDBDBD",
+                  dark: "#828282"}, 
+                tertiary: {
+                  light: "#39FF14", // Neon Green
+                  Default: "#E0E0E0",
+                  dark: "#C4C4C4"} },
+                accent: "#FF00FF", // Neon Pink
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
