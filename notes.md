@@ -200,7 +200,14 @@
 
 
 ## Add Dark Mode.    
-
+1. Install the package **next-themes** to add the dark mode.
+   - Via **npm** `npm install next-themes`
+   - Via **yarn** `yarn add next-themes`
+2. Now go to **/src/app** and create **Providers.tsx** reasons is that NextJS components are server side and we need a client side.
+3. Create a RFC (React Functional Component):
+   `
+   
+   `
 
 
 

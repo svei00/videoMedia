@@ -13,7 +13,9 @@ const config: Config = {
                   Default: "#7C3AED", // Purple
                   dark: "#0D0D0D",
                   gold: "#D4C19C",
-                  text: "#C0C0C0"
+                  silver: "#C0C0C0",
+                  text: "#333333", // Dark Gray
+                  orange: "#D2691E" // Burnt Orange
                 }, 
                 secondary: {
                   light: "#7DF9FF", // Electric Blue 
