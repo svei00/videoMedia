@@ -54,12 +54,12 @@
    - Open the file and add the configuration:
       `
          module.exports = {
-            semi: false,
-            singleQuote: true,
-            trailingComma: 'none',
-            printWidth: 80,
-            tabWidth: 2,
-            useTabs: true,
+            "semi": false,
+            "singleQuote": true,
+            "trailingComma": "none",
+            "printWidth": 80,
+            "tabWidth": 2,
+            "useTabs": true
          };
       `
    - Also if you don't have the file **.eslintrc.json** add it into **/** and add the code:
@@ -74,9 +74,11 @@
       }
     }
    `
-   - Now you can run the app and see the changes.
+   - If having issues with eslint check your packages
+     * **npm** `npm install --save-dev eslint-config-prettier eslint-plugin-prettier`
+     * **yarn** `yarn add --dev eslint-config-prettier eslint-plugin-prettier`
   
-1. Add TailwindCSS to the project.
+9. Add TailwindCSS to the project.
    - Via **npm** `npm install -D tailwindcss postcss autoprefixer`
    - via **yarn** `yarn add -D tailwindcss postcss autoprefixer`
    - Then `npx tailwindcss init -p` to create the **tailwind.config.js** file.
@@ -239,7 +241,7 @@
 2. Now go to **/src/app** and create **Providers.tsx** reasons is that NextJS components are server side and we need a client side.
 3. Create a RFC (React Functional Component):
    `
-   Add the typescript here
+   Add the typescript here. Remember that the Themeprovider is frontEnd and that way we are separating back and front end.
    `
 4. In **/src/app/** file **layout.tsx** add the **Providers** component.
    - Go to **RootLayout** funtion and:
@@ -259,6 +261,57 @@
         </Providers>
       </body>
      `
+5. Go back the the **Providers.tsx** file and add the **ThemeProvider** component.
+   - Change:
+     `
+      const Providers = ({ children }: { children: React.ReactNode }) => {
+        return (
+          <>
+            {children}
+          </>
+        );
+      };
+     `
+     to:
+     `
+      const Providers = ({ children }: { children: React.ReactNode }) => {
+        return (
+          <ThemeProvider attribute='class' defaultTheme='system' enableColorScheme='true'>
+            {children}
+          </ThemeProvider>
+        );
+      };
+     `
+6. Go to root and open **tailwind.config.ts** and add and the very end the line:
+   `darkMode: "class",` around line of code 40.
+7. Create another component on **/src/app** called **DarkModeSwitch.tsx**
+   - Add the RFC (React Functional Component)
+      `
+      import React from 'react'
+
+         export default function DarkModeSwitch() {
+         return (
+            <div>DarkModeSwitch</div>
+         )
+      }
+
+      `
+8. Go to **Header.tsx** and add the **DarkModeSwitch** component.
+   - Change:
+     `
+      <div className='flex justify-between items-center'>
+         <Link href='/'>
+            <span className='text-4xl font-bold text-white'>Movie</span>
+            <span className='text-xl hidden sm:inline'>Collection</span>
+         </Link>
+      </div>
+     `
+     to:
+     `
+      <div className='flex justify-between items-center'>
+         <Link href='/'>
+            <span className='text-4xl font-bold text-white'>Movie</span>
+
 
 
 # Bibliography
