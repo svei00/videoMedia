@@ -47,6 +47,39 @@
    - Change export const metadata::
      * `title: "Video Media",`
      * `description: "This is a movie and series database",`
+8. Add Prettier to make the app more consice.
+   - Via **npm** `npm install --save-dev prettier`
+   - via **yarn** `yarn add --dev prettier`
+   - Add to the **/** root the file **.prettierrc.js**
+   - Open the file and add the configuration:
+      `
+         module.exports = {
+            semi: false,
+            singleQuote: true,
+            trailingComma: 'none',
+            printWidth: 80,
+            tabWidth: 2,
+            useTabs: true,
+         };
+      `
+   - Also if you don't have the file **.eslintrc.json** add it into **/** and add the code:
+   - `
+   - {
+      "extends": [
+         "next/core-web-vitals",
+         "prettier"
+      ],
+      "rules": {
+         "prettier/prettier": "error"
+      }
+    }
+   `
+   - Now you can run the app and see the changes.
+  
+1. Add TailwindCSS to the project.
+   - Via **npm** `npm install -D tailwindcss postcss autoprefixer`
+   - via **yarn** `yarn add -D tailwindcss postcss autoprefixer`
+   - Then `npx tailwindcss init -p` to create the **tailwind.config.js** file.
 
 ## Clone the repository
 1. Go to [GitHub](https://github.com/)
@@ -206,9 +239,26 @@
 2. Now go to **/src/app** and create **Providers.tsx** reasons is that NextJS components are server side and we need a client side.
 3. Create a RFC (React Functional Component):
    `
-   
+   Add the typescript here
    `
-
+4. In **/src/app/** file **layout.tsx** add the **Providers** component.
+   - Go to **RootLayout** funtion and:
+     Change:
+     `
+      <body className={inter.className}>
+        <Header />
+        {children}
+      </body>
+     `
+     to:
+     `
+      <body className={inter.className}>
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
+      </body>
+     `
 
 
 # Bibliography
