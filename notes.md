@@ -310,8 +310,96 @@
      `
       <div className='flex justify-between items-center'>
          <Link href='/'>
-            <span className='text-4xl font-bold text-white'>Movie</span>
+            <span className='text-4xl font-bold text-white'>Movie</span>9.
 
+9. Files should look like this:
+    - **Providers.tsx**:
+      `
+     'use client'
+
+         import { ReactNode } from "react";
+         import {ThemeProvider} from "next-themes";
+
+         interface ProvidersProps {
+         children: ReactNode;
+         }
+
+         export default function Providers({children}: ProvidersProps) {
+         return (
+            <ThemeProvider defaultTheme="system" attribute="class">
+                     <div className="text-gray-700 dark:text-gray-200 dark:bg-gray-700 min-h-screen select-none transition-colors duration-300">
+                        {children}
+                     </div>
+               </ThemeProvider>
+            )
+         }
+         `
+      - **DarkModeSwitch.tsx**:
+      `
+      'use client'
+
+            import { MdLightMode, MdDarkMode} from "react-icons/md"
+            import {useTheme} from "next-themes"
+            import { useEffect, useState } from "react"
+
+            export default function DarkModeSwitch() {
+            
+            const [mounted, setMounted] = useState(false)
+            const {theme, setTheme, systemTheme} = useTheme()
+            
+            // useEffect to handle mounting.
+            useEffect (() => setMounted(true), [])
+
+            if (!mounted) return null
+
+            const currentTheme = theme === "system" ? systemTheme : theme // If the current theme is system, use the system theme, otherwise use the current theme
+
+            return (
+               <div>
+                  {currentTheme === "dark" ? <MdLightMode onClick={() => setTheme("light")} className="text-xl cursor-pointer hover:text-secondary-light"/> : <MdDarkMode onClick={() => setTheme("dark")} className="text-xl cursor-pointer hover:text-primary-light" />}
+               </div>
+            )
+            }
+
+      `
+   - **Header.tsx**
+      `
+         import React from 'react'
+         import MenuItem from './MenuItem'
+         import { AiFillHome } from 'react-icons/ai'
+         import { BsFillInfoCircleFill } from 'react-icons/bs'
+         import Link from 'next/link';
+         import DarkModeSwitch from './DarkModeSwitch';
+
+         interface HeaderProps {
+
+
+         }
+
+         const Header = ({}:HeaderProps): JSX.Element => {
+         
+            return (
+               <div className='flex justify-between items-center p-3 max-w-6xl mx-auto'>
+                  <div className='flex gap-4'>
+                     <MenuItem title="home" address="/" Icon={AiFillHome} />
+                     <MenuItem title="about" address="/about" Icon={BsFillInfoCircleFill} />
+                  </div>
+                  <div className='flex gap-4 items-center'>
+                  <DarkModeSwitch/>
+                  <Link href={'/'} className='flex gap-1 items-center'>
+                     <span className='text-2xl text-primary-text font bold bg bg-primary-light hover:bg-secondary-light py-1 px-2 rounded-lg'>VideoMedia</span>
+                     <span className='text-xl hidden sm:inline mt-4 mr-4 mb-4 border-t-4 border-r-4 border-b-4 border-primary-orange rounded-tr-md rounded-br-md overflow-x-visible -ml-pxtext-xl hidden sm:inline mt-4 mr-6 mb-4 border-t-4 border-r-4 border-b-4 border-primary-orange rounded-tr-md rounded-br-md overflow-x-visible -ml-1.5 pl-1 pr-2'>Collection</span>
+                  </Link>
+                  </div>
+               
+               </div>
+               );
+            };
+            
+            export default Header;
+      `
+
+## Create the About Page.
 
 
 # Bibliography
