@@ -400,6 +400,22 @@
       `
 
 ## Create the About Page.
+1. Go to **/src/app** and create a new folder called **about**.
+2. Inside the **about** folder create a new file called **page.tsx**.
+   - Create a RFC (React Funtional Component).
+     `
+      import React from 'react'
+
+         export default function About() {
+         
+         return (
+            <div>About VideoMedia</div>
+         )
+      }
+
+     `
+   - As you can see inmediatelly the route to the pages has been created.
+   
 
 
 # Bibliography
