@@ -434,7 +434,73 @@
      `
 
 ## Create the Navbar Component.
-   
+1. Go to **/src/components** and create a new file called **Navbar.tsx**.
+   - Create a RFC (React Funtional Component).
+     `
+      import React from 'react'
+      import NavbarItem from './NavbarItem'
+
+      export default function Navbar() {
+      return (
+         <div className='flex dark:bg-primary-light bg-secondary-light p-4 lg:text-lg justify-center gap-6'>
+            <NavbarItem title="Trending" param="fetchTrending"/>
+            <NavbarItem title="Top Rated" param="fetchTopRated"/>
+         </div>
+         )
+      }
+
+   `
+2. Create another React Funtional Component called **NavbarItem.tsx**.
+   - Create a RFC (React Funtional Component).
+     `
+         'use client'
+
+      import Link from 'next/link'
+      import { useSearchParams } from 'next/navigation'
+
+      interface NavbarItemProps {
+         title: string,
+         params: string
+      }
+
+      const NavbarItem = ({title, param}): JSX.Element => {
+      
+      const searchParams = useSearchParams();
+      const genre = searchParams.get('genre');
+
+      return (
+         <div>
+            <Link 
+      className={`hover:font-bold ${genre === param ? 'font-bold underline underline-offset-8 decoration-4 decoration-primary-orange rounded-lg' : ''}`} 
+      href={`/?genre=${param}`}
+      >
+      {title}
+      </Link>
+         </div>
+      )
+      }
+
+      export default NavbarItem
+   `
+3. In the **/src/app/layout.tsx** add the *<Navbar>* component. Remember if not Autoimport do it: `import Navbar from "@/components/Navbar";`:
+   - Was:
+     `
+      <Providers>
+          <Header />
+          {children}
+      </Providers>
+     `
+   - Now:
+     `
+      <Providers>
+          <Header />
+          <Navbar />
+          {children}
+      </Providers>
+     `
+
+## Fetch Data from TMDB API in the Home Page.
+
 
 
 # Bibliography

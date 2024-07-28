@@ -22,7 +22,7 @@ const Header = ({}:HeaderProps): JSX.Element => {
            <DarkModeSwitch/>
           <Link href={'/'} className='flex gap-1 items-center'>
             <span className='text-2xl text-primary-text font bold bg bg-primary-light hover:bg-secondary-light py-1 px-2 rounded-lg'>VideoMedia</span>
-            <span className='text-xl hidden sm:inline mt-4 mr-4 mb-4 border-t-4 border-r-4 border-b-4 border-primary-orange rounded-tr-md rounded-br-md overflow-x-visible -ml-pxtext-xl hidden sm:inline mt-4 mr-6 mb-4 border-t-4 border-r-4 border-b-4 border-primary-orange rounded-tr-md rounded-br-md overflow-x-visible -ml-1.5 pl-1 pr-2'>Collection</span>
+            <span className='text-xl hidden sm:inline mt-4 mr-4 mb-4 border-t-4 border-r-4 border-b-4 border-primary-orange rounded-tr-md rounded-br-md overflow-x-visible -ml-pxtext-xl hidden sm:inline mt-4 mr-6 mb-4 border-t-4 border-r-4 border-b-4 border-primary-orange rounded-tr-md rounded-br-md overflow-x-visible -ml-1.5 pl-1 pr-2 p-0.875'>Collection</span>
           </Link>
           </div>
         
