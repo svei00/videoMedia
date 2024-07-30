@@ -500,6 +500,22 @@
      `
 
 ## Fetch Data from TMDB API in the Home Page.
+1. Go to [Google](www.google.com) and search for **TMDB API** to get the API key.
+2. Open page [TMBD Page](https://www.themoviedb.org/)
+   - Then hit join TMDB and register with your data.
+   - Account verification is required. Verify the account.
+3. After the verification go to your initiar/avatar and select settings.
+   - Then on the left panel hit on **API**
+   - If don't have any API **Request** it.
+4. On the **root directory** of your app:
+   - Create .env.local file and add the API key.
+   - Create the variable: **API_KEY** like this:
+     `API_KEY = example_123456789`
+5. Now ho to **/src/app/page.tsx** and add the following code:
+   `
+
+   `
+   1:26:00
 
 
 
