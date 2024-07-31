@@ -513,12 +513,91 @@
      `API_KEY = example_123456789`
 5. Now ho to **/src/app/page.tsx** and add the following code:
    `
+   import Results from "@/components/Results";
+
+      const API_KEY = process.env.API_KEY;
+
+      interface HomeProps {
+      searchParams: {
+         genre?: string;
+      };
+      }
+
+      export default async function Home({ searchParams }: HomeProps): Promise<JSX.Element> {
+      const genre = searchParams.genre || 'fetchTrending'
+      
+      const res = await fetch(
+         `https://api.themoviedb.org/3${
+            genre === 'fetchTopRated' ? `/movie/top_rated` : `/trending/all/week`
+         }?api_key=${API_KEY}&language=en-US&page=1`,
+         { next: { revalidate: 10000 } } // Revalidate every 10000 seconds
+      )
+
+         if (!res.ok) {
+            throw new Error('Failed to fetch data')
+         }
+
+      const data = await res.json()
+      const results = data.results
+
+         return (
+            <div>
+               <Results results={results} />
+            </div>
+         )
+      }
 
    `
 6. On **/src/componets** create another RFC componet on file **Results.tsx** and import it into **/src/app/page.tsx**
+   Code should look like this:
+   `
+   import React from 'react'
+
+      interface Movie {
+         id: number;
+         title: string;
+         backdrop_path: string;
+         overview: string;
+         poster_path: string;
+         release_date: string;
+         vote_average: number;
+         vote_count: number;
+         popularity: number;
+         original_language: string;
+         original_title: string;
+         genre_ids: number[];
+         video: boolean;
+         adult: boolean;
+      }
+
+   interface ResultsProps {
+      results: Movie[];
+   }
+
+      const Results = ({results}: ResultsProps): JSX.Element => {
+         return (
+            <div>
+               {results.map((result) => (
+            <div key={result.id}>
+               <h2>{result.original_title}</h2> 
+            </div>
+         ))}
+            </div>
+         )
+      }
+
+      export default Results
+   `
     
 
 ## Handle the Error Using Next.js 14
+1. Inside the **/src/app/** create a file called **error.tsx** in *lowercase*.
+2. Create a React Functional Component (RFC). 
+   Functions should look like this:
+   `
+   `
+
+## Add Loading Effect Using Next.js 14
 
 
 # Bibliography
