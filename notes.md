@@ -515,8 +515,10 @@
    `
 
    `
-   1:26:00
+6. On **/src/componets** create another RFC componet on file **Results.tsx** and import it into **/src/app/page.tsx**
+    
 
+## Handle the Error Using Next.js 14
 
 
 # Bibliography
