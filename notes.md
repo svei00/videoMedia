@@ -622,7 +622,67 @@
    `
 
 ## Add Loading Effect Using Next.js 14
+1. Go to **/src/app** and create file **loading.tsx** in *lowercase*.
+2. Go to website [Loading IO](https://loading.io/)
+   - Cutomize your spinner loading animation.
+   - Download as SVG
+   - Paste into **/public** folder.
+3. Create a React Functional Component (RFC). 
+   Functions should look like this:
+   `
+   import React from 'react'
 
+      export default function Loading(): JSX.Element {
+      
+      return (
+         <div className='flex justify-center mt-16'>
+            <img className='h-48' src='loading.svg' alt='Loading...'/>
+         </div>
+      )
+      }
+
+   `
+   For testing purposes into the loading effect, you can use the following code:
+   On **/src/app/page.tsx**
+   Change
+   `
+   const res = await fetch(
+      `https://api.themoviedb.org/3${
+         genre === 'fetchTopRated' ? `/movie/top_rated` : `/trending/all/week`
+      }?api_key=${API_KEY}&language=en-US&page=1`,
+      { next: { revalidate: 10000 } } // Revalidate every 10000 seconds
+   )   
+   To:
+   `
+   setTimeout(async () => {
+      const res = await fetch(
+         `https://api.themoviedb.org/3${
+            genre === 'fetchTopRated' ? `/movie/top_rated` : `/trending/all/week`
+         }?api_key=${API_KEY}&language=en-US&page=1`,
+         { next: { revalidate: 10 } } // Revalidate every 10000 seconds
+      );
+
+      resolve(res);
+      }, 2000); // Delay 2 Seconds
+   `
+
+## Add Card Component.
+
+
+## Add Error Handling Using Next.js 14
+1. Go to **/src/app** and create file **error.tsx** in *lowercase*.
+2. Create a React Functional Component (RFC). 
+   Functions should look like this:
+   `
+   'use client'
+
+      import {useEffect} from 'react'
+
+      interface errorProps {
+      error: Error;
+      reset: (
+   })
+   `
 
 # Bibliography
 - [Sahan Ghavidel imDB Clone](https://www.youtube.com/watch?v=69vpmZgDeN8) 
