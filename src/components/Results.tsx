@@ -1,4 +1,5 @@
 import React from 'react'
+import Card from './Card';
 
 interface Movie {
     id: number;
@@ -26,7 +27,7 @@ const Results = ({results}: ResultsProps): JSX.Element => {
     <div>
       {results.map((result) => (
     <div key={result.id}>
-        <h2>{result.original_title}</h2> 
+        <Card key={result.id} result={result} />
     </div>
 ))}
     </div>

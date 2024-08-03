@@ -666,9 +666,6 @@
       }, 2000); // Delay 2 Seconds
    `
 
-## Add Card Component.
-
-
 ## Add Error Handling Using Next.js 14
 1. Go to **/src/app** and create file **error.tsx** in *lowercase*.
 2. Create a React Functional Component (RFC). 
@@ -683,6 +680,36 @@
       reset: (
    })
    `
+
+## Add Card Component.
+1. Add a new file **Card.tsx** in **/src/app/components**.
+2. Create a React Functional Component:
+    `
+
+    `
+3. On folder **/src/componets** file **Results.tsx** change:
+   From:
+   `
+   const Results = ({results}: ResultsProps): JSX.Element => {
+   return (
+         <div>
+            {results.map((result) => (
+         <div key={result.id}>
+            <<h2>{result.original_title}</h2>> 
+         </div>
+      ))}
+         </div>
+      )
+   }
+
+   export default Results
+
+   `
+   To:
+   `
+
+   ` 
+
 
 # Bibliography
 - [Sahan Ghavidel imDB Clone](https://www.youtube.com/watch?v=69vpmZgDeN8) 
