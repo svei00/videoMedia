@@ -3,7 +3,24 @@ import Link from 'next/link'
 import React from 'react'
 import { FiThumbsUp } from 'react-icons/fi'
 
-export default function Card({result}) {
+interface ResultProps {
+    id: number;
+    backdrop_path?: string;
+    poster_path?: string;
+    title?: string;
+    name?: string;
+    overview: string;
+    release_date?: string;
+    first_air_date?: string;
+    vote_count: number;
+}
+
+interface CardProps {
+    result: ResultProps;
+
+}
+
+export default function Card({result}: CardProps): JSX.Element {
   return (
     <div className='group cursor-pointer sm:hover:shadow-primary-gold sm-shadow-md rounded-lg sm:border-primary-gold sm:border-2 sm:p-2 sm:rounded-lg sm:shadow-lg sm:shadow-primary-gold sm:shadow-md sm:hover:shadow-primary-gold sm:m-2 sm:hover:shadow-md sm:hover:scale-105 transition-all duration-300 ease-in-out'>
         <Link href={`/movie/${result.id}`}>
