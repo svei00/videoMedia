@@ -807,6 +807,13 @@
 
 
 ## Add Movie Page.
+1. To create the movie page go to **/app** and similary to about page create folder called **movie** then inside that folder another one called **[id]**. Inside that folder create file **page.tsx**. 
+2. On **/app/movie/[id]** folder create file **page.tsx** and add a RFC (React Functional Component):
+   `
+   
+   `
+
+## Add Search Box.
 
 
 
