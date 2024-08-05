@@ -1,11 +1,33 @@
 import Image from "next/image";
 import { FiThumbsUp } from "react-icons/fi";
 
-export default async function MoviePage({params}) {
+interface MoviePageProps {
+    params: {
+        id: string;
+    }
+}
+
+interface MovieDetails {
+    backdrop_path?: string;
+    poster_path?: string;
+    title?: string;
+    name?: string;
+    overview?: string;
+    release_date?: string;
+    first_air_date?: string;
+    vote_count?: number;
+}
+
+export default async function MoviePage({params}: MoviePageProps): Promise<JSX.Element> {
   
   const movieId = params.id;
   const res = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.API_KEY}`);
-  const movie = await res.json();
+  
+  if (!res.ok) {
+    throw new Error('Failed to fetch movie data');
+  }
+  
+  const movie: MovieDetails = await res.json();
 
   // console.log(movie); // Test console.log to see what happend with the Movie we bring
 
