@@ -873,6 +873,19 @@
    `
 
 ## Add Search Box.
+1. Create a **SearchBox.tsx** React Funtional Component into folder **/src/components**
+   `
+
+   `
+2. Then add the **<SearchBox />** into **/src/app/** into **layout.tsx** file Afther the *<Navbar/>* Component.
+   `<SearchBox />`
+3. Create a new page into **/src/app** so create folder **search** then **[searchTerm]** and finally create **page.tsx**
+   - Create a RFC:
+     `
+
+     `
+
+## Deploy to Hostinger.
 
 
 
