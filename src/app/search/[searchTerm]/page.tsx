@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next';
+import { Suspense } from 'react';
 import Results from "@/components/Results";
 
 interface SearchPageProps {
@@ -7,7 +7,7 @@ interface SearchPageProps {
     }
 }
 
-interface MovieResult {
+interface Movie {
     id: number;
     title: string;
     backdrop_path: string;
@@ -20,19 +20,20 @@ interface MovieResult {
     original_language: string;
     original_title: string;
     genre_ids: number[];
+    video: boolean;
+    adult: boolean;
 }
 
 interface SearchResponse {
-    results: MovieResult[];
+    results: Movie[];
 }
 
-export default async function SearchPage({params}: SearchPageProps): Promise<JSX.Element> {
-    const searchTerm = params.searchTerm;
+async function fetchSearchResults(searchTerm: string): Promise<Movie[]> {
     const apiKey = process.env.API_KEY;
 
     if (!apiKey) {
         console.error('API_KEY is not set');
-        return <div>Error: API key is missing</div>;
+        return [];
     }
 
     try {
@@ -43,9 +44,19 @@ export default async function SearchPage({params}: SearchPageProps): Promise<JSX
         }
 
         const data: SearchResponse = await res.json();
-        const results = data.results;
+        return data.results;
+    } catch (error) {
+        console.error('Error fetching search results:', error);
+        return [];
+    }
+}
 
-        return (
+export default async function SearchPage({ params }: SearchPageProps) {
+    const searchTerm = params.searchTerm;
+    const results = await fetchSearchResults(searchTerm);
+
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
             <div>
                 {results.length === 0 ? (
                     <p>No Results Found.</p>
@@ -53,19 +64,6 @@ export default async function SearchPage({params}: SearchPageProps): Promise<JSX
                     <Results results={results} />
                 )}
             </div>
-        );
-    } catch (error) {
-        console.error('Error fetching search results:', error);
-        return <div>Error: Failed to fetch search results</div>;
-    }
+        </Suspense>
+    );
 }
-
-export const getServerSideProps: GetServerSideProps<SearchPageProps> = async (context) => {
-    return {
-        props: {
-            params: {
-                searchTerm: context.params?.searchTerm as string || '',
-            },
-        },
-    };
-};

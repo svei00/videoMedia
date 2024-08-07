@@ -19,7 +19,7 @@ interface Movie {
   }
 
   interface ResultsProps {
-    results: MovieResult[];
+    results: Movie[];
   }
 
 const Results = ({results}: ResultsProps): JSX.Element => {
