@@ -39,6 +39,7 @@ export default async function MoviePage({params}: MoviePageProps): Promise<JSX.E
             width={500}
             height={300}
             className="rounded-lg"
+            alt={`Backdrop for ${movie.title || movie.name}`}
             style={{maxWidth: "100%", height: "auto"}} // To fix the issue when changing browser size
             ></Image>
         <div className="p-2">

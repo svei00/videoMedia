@@ -887,6 +887,46 @@
 
 ## Deploy to Hostinger.
 
+- npm build 2:19
+
+## Deploy in Render.
+1. Make sure to have those scripts in **package.json**:
+   `
+   "scripts": {
+      "dev": "next dev",
+      "build": "next build",
+      "start": "next start",
+    },
+   `
+2. Then run:
+   - If via **npm** `npm run build` and **npm run postbuild** to export the app.
+   - If via **yarn** `yarn build` and **yarn postbuild** to export the app.
+3. Then go to [Render](https://render.com/) and create an account if don't have one if yes create new **Web service**
+   - Create a new **Web Service**
+   - Connect your gitHub account.
+4. Configure the **Web Service**
+   - **Web Service Name**: `yourChoosenName`
+   - **Repository**: `your repository`
+   - **Enviroment**: Node
+   - **Region**: Choose your nearest region.
+   - **Branch**: `main`
+   - **Build Command**: `npm run build`
+   - **Start Command**: `npm run start`
+5. Set the enviroment variables.
+   - **API_KEY**: `your API_KEY`
+   - **NEXT_PUBLIC_API_KEY**: `your API_KEY`
+6. Set the node version on your **package.json**
+   `
+   "engines": {
+   "node": ">=18.0.0"
+   }  
+   `
+7. Deploy the app.
+   - **Deploy**
+   - **Deploy**
+   - **Deploy**
+8. Then you can access your app by the URL.
+
 
 
 # Bibliography
