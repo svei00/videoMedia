@@ -25,7 +25,8 @@ export default function Card({result}: CardProps): JSX.Element {
     <div className='group cursor-pointer sm:hover:shadow-primary-gold sm-shadow-md rounded-lg sm:border-primary-gold sm:border-2 sm:p-2 sm:rounded-lg sm:shadow-lg sm:shadow-primary-gold sm:shadow-md sm:hover:shadow-primary-gold sm:m-2 sm:hover:shadow-md sm:hover:scale-105 transition-all duration-300 ease-in-out'>
         <Link href={`/movie/${result.id}`}>
             <Image src={`https://image.tmdb.org/t/p/original/${
-                result.backdrop_path || result.poster_path}`} alt={result.title}
+                result.backdrop_path || result.poster_path}`}
+                alt={result.title || 'Image'}
                 width={500}
                 height={300}
                 className="sm:rounded-t-lg group-hover:opacity-75 transition-all duration-300 ease-in-out"
