@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import React from 'react'
-import {iconType} from 'react-icons'
+import {IconType} from 'react-icons'
 
 export interface MenuItemProps {
   title: string,
   address: string,
-  Icon: iconType
+  Icon: IconType
 }
 
 const MenuItem = ({title, address, Icon}: MenuItemProps): JSX.Element => {
