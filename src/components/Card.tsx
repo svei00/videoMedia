@@ -29,11 +29,10 @@ export default function Card({result}: CardProps): JSX.Element {
   useEffect(() => {
     const loadImage = async () => {
       try {
-        const url = `https://image.tmdb.org/t/p/original/${result.backdrop_path || result.poster_path}`;
-        const res = await fetch(url, { method: 'HEAD' });
-        if (!res.ok) throw new Error('Failed to load image');
+        const url = `https://image.tmdb.org/t/p/w500/${result.backdrop_path || result.poster_path}`;
         setImageUrl(url);
       } catch (err) {
+        console.error('Error loading image:', err);
         setError('Failed to load image');
       } finally {
         setIsLoading(false);
