@@ -1,7 +1,10 @@
 'use client'
 
+'use client'
+
 import React, { useState, useEffect } from 'react'
 import NavbarItem from './NavbarItem'
+import DropdownMenu from './DropdownMenu'
 import { FaArrowUp } from 'react-icons/fa'
 
 export default function Navbar() {
@@ -29,6 +32,26 @@ export default function Navbar() {
       <div className={`fixed top-20 left-0 right-0 z-50 flex dark:bg-primary-light bg-secondary-light p-4 lg:text-lg justify-center gap-6 backdrop-blur-sm transition-all duration-300 ${isScrolled ? 'bg-opacity-50 dark:bg-opacity-50 shadow-md' : ''}`}>
         <NavbarItem title="Trending" param="fetchTrending"/>
         <NavbarItem title="Top Rated" param="fetchTopRated"/>
+        <DropdownMenu title="My Collection" items={[
+          { title: 'Series', submenu: [
+            { title: 'Year' },
+            { title: 'Genre', submenu: [] } // We'll populate this later
+          ]},
+          { title: 'Movies', submenu: [
+            { title: 'Year' },
+            { title: 'Genre', submenu: [] } // We'll populate this later
+          ]}
+        ]} />
+        <DropdownMenu title="Media" items={[
+          { title: 'Series', submenu: [
+            { title: 'Year' },
+            { title: 'Genre', submenu: [] } // We'll populate this later
+          ]},
+          { title: 'Movies', submenu: [
+            { title: 'Year' },
+            { title: 'Genre', submenu: [] } // We'll populate this later
+          ]}
+        ]} />
       </div>
       
       {isScrolled && (

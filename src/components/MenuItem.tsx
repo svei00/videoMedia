@@ -11,7 +11,7 @@ export interface MenuItemProps {
 const MenuItem = ({title, address, Icon}: MenuItemProps): JSX.Element => {
   // const {title, address, Icon} = props
   return (
-    <Link href={address} className='hover:text-purple-600'>
+    <Link href={address} className='hover:text-primary-light'>
         <Icon className="text-2xl sm:hidden"/>
         <p className='capitalize hidden sm:inline text-sm font-semibold'>{title}</p>
     </Link>
