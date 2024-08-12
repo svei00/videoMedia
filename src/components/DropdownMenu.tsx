@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 
 interface MenuItem {
@@ -15,10 +15,24 @@ interface DropdownMenuProps {
 
 const DropdownMenu: React.FC<DropdownMenuProps> = ({ title, items }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const renderMenuItem = (item: MenuItem, depth: number = 0) => (
     <div key={item.title} className={`pl-${depth * 4}`}>
-      <Link href={`/${title.toLowerCase()}/${item.title.toLowerCase()}`}>
+      <Link href={`/${title.toLowerCase()}/${item.title.toLowerCase()}`} className="block px-4 py-2 text-sm hover:bg-primary-orange hover:text-white">
         {item.title}
       </Link>
       {item.submenu && (
@@ -30,7 +44,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ title, items }) => {
   );
 
   return (
-    <div className="relative">
+    <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="hover:font-bold focus:outline-none"
@@ -38,7 +52,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ title, items }) => {
         {title}
       </button>
       {isOpen && (
-        <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+        <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg dark:bg-primary-light bg-secondary-light ring-1 ring-black ring-opacity-5 z-50">
           <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
             {items.map(item => renderMenuItem(item))}
           </div>
