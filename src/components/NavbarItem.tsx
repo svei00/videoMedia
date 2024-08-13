@@ -7,18 +7,26 @@ import { Suspense } from 'react';
 interface NavbarItemProps {
     title: string;
     param: string;
+    onClick?: () => void;
 }
 
-const NavbarItem = ({ title, param }: NavbarItemProps): JSX.Element => {
+const NavbarItem = ({ title, param, onClick }: NavbarItemProps): JSX.Element => {
   
   const searchParams = useSearchParams();
   const genre = searchParams.get('genre');
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (onClick) {
+      onClick();
+    }
+  };
 
   return (
     <div>
       <Link 
         className={`hover:font-bold ${genre === param ? 'font-bold underline underline-offset-8 decoration-4 decoration-primary-orange rounded-lg' : ''}`} 
         href={`/?genre=${param}`}
+        onClick={handleClick}
       >
         {title}
       </Link>
