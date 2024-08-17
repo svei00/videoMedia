@@ -8,10 +8,10 @@ const Footer = () => {
       <div className="w-full max-w-7xl mx-auto px-4 py-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
-            <Link href="/" className="flex items-center">
-              <Image src="/path-to-your-logo.png" alt="Logo" width={80} height={23} />
-              <span className="text-secondary-light dark:text-primary-light ml-2 text-xl font-semibold">Blog</span>
-            </Link>
+          <Link href={'/'} className='flex gap-1 items-center'>
+            <span className='text-2xl text-primary-text font bold bg bg-primary-light hover:bg-secondary-light py-1 px-2 rounded-lg'>VideoMedia</span>
+            <span className='text-xl sm:inline mt-4 mr-4 mb-4 border-t-4 border-r-4 border-b-4 border-primary-orange rounded-tr-md rounded-br-md overflow-x-visible -ml-1.5 pl-1 pr-2 p-0.875'>Collection</span>
+          </Link>
           </div>
           <div>
             <h2 className="text-lg font-semibold mb-2">About</h2>
@@ -29,7 +29,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <hr className="my-6 border-secondary-light dark:border-primary-light" />
+        <hr className="my-6 border-primary-orange dark:border-primary-light" />
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p>&copy; {new Date().getFullYear()} Ivan E. Villanueva. All rights reserved.</p>
           <div className="flex space-x-4 mt-4 md:mt-0">
