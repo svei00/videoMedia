@@ -14,22 +14,24 @@ const MediaSection: React.FC<MediaSectionProps> = ({ category, subCategory, valu
 
   useEffect(() => {
     const fetchData = async () => {
-      if (subCategory === 'year' && !value) {
-        const yearsResponse = await fetch(`/api/media/${category}/years`);
-        const yearsData = await yearsResponse.json();
-        setYears(yearsData);
-      } else if (subCategory === 'genre' && !value) {
-        const genresResponse = await fetch(`/api/media/${category}/genres`);
-        const genresData = await genresResponse.json();
-        setGenres(genresData);
-      } else {
-        let url = `/api/media/${category}`;
-        if (subCategory && value) {
-          url += `/${subCategory}/${value}`;
-        }
+      if (subCategory === 'year' && value) {
+        const url = `/api/${category}/[year]?year=${value}`;
         const response = await fetch(url);
         const data = await response.json();
         setItems(data);
+      } else if (subCategory === 'genre' && value) {
+        const url = `/api/${category}/[genre]?genre=${value}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        setItems(data);
+      } else if (subCategory === 'year') {
+        const yearsResponse = await fetch(`/api/years`);
+        const yearsData = await yearsResponse.json();
+        setYears(yearsData);
+      } else if (subCategory === 'genre') {
+        const genresResponse = await fetch(`/api/genres?category=${category}`);
+        const genresData = await genresResponse.json();
+        setGenres(genresData);
       }
     };
 
