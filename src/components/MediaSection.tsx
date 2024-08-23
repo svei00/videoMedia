@@ -33,11 +33,24 @@ const MediaSection: React.FC<MediaSectionProps> = ({ category, subCategory, valu
     fetchData();
   }, [category, subCategory, value]);
 
+  if (!subCategory) {
+    return (
+      <div className="grid grid-cols-2 gap-4">
+        <Link href={`/media/${category}/year`}>
+          <div className="p-2 bg-secondary-light dark:bg-primary-light rounded">Year</div>
+        </Link>
+        <Link href={`/media/${category}/genre`}>
+          <div className="p-2 bg-secondary-light dark:bg-primary-light rounded">Genre</div>
+        </Link>
+      </div>
+    );
+  }
+
   if (subCategory === 'year' && !value) {
     return (
       <div className="grid grid-cols-4 gap-4">
         {years.map((year) => (
-          <Link key={year} href={`/media/${category}/${year}?type=year`}>
+          <Link key={year} href={`/media/${category}/year/${year}`}>
             <div className="p-2 bg-secondary-light dark:bg-primary-light rounded">{year}</div>
           </Link>
         ))}
@@ -49,7 +62,7 @@ const MediaSection: React.FC<MediaSectionProps> = ({ category, subCategory, valu
     return (
       <div className="grid grid-cols-3 gap-4">
         {genres.map((genre) => (
-          <Link key={genre.id} href={`/media/${category}/${genre.id}?type=genre`}>
+          <Link key={genre.id} href={`/media/${category}/genre/${genre.id}`}>
             <div className="p-2 bg-secondary-light dark:bg-primary-light rounded">{genre.name}</div>
           </Link>
         ))}
