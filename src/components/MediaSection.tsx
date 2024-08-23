@@ -14,13 +14,8 @@ const MediaSection: React.FC<MediaSectionProps> = ({ category, subCategory, valu
 
   useEffect(() => {
     const fetchData = async () => {
-      if (subCategory === 'year' && value) {
-        const url = `/api/${category}/[year]?year=${value}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        setItems(data);
-      } else if (subCategory === 'genre' && value) {
-        const url = `/api/${category}/[genre]?genre=${value}`;
+      if (subCategory && value) {
+        const url = `/api/${category}/${value}?type=${subCategory}`;
         const response = await fetch(url);
         const data = await response.json();
         setItems(data);
@@ -42,7 +37,7 @@ const MediaSection: React.FC<MediaSectionProps> = ({ category, subCategory, valu
     return (
       <div className="grid grid-cols-4 gap-4">
         {years.map((year) => (
-          <Link key={year} href={`/media/${category}/year/${year}`}>
+          <Link key={year} href={`/media/${category}/${year}?type=year`}>
             <div className="p-2 bg-secondary-light dark:bg-primary-light rounded">{year}</div>
           </Link>
         ))}
@@ -54,7 +49,7 @@ const MediaSection: React.FC<MediaSectionProps> = ({ category, subCategory, valu
     return (
       <div className="grid grid-cols-3 gap-4">
         {genres.map((genre) => (
-          <Link key={genre.id} href={`/media/${category}/genre/${genre.id}`}>
+          <Link key={genre.id} href={`/media/${category}/${genre.id}?type=genre`}>
             <div className="p-2 bg-secondary-light dark:bg-primary-light rounded">{genre.name}</div>
           </Link>
         ))}
