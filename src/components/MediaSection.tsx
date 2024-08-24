@@ -3,83 +3,80 @@ import Link from 'next/link';
 
 interface MediaSectionProps {
   category: 'series' | 'movies';
-  subCategory?: 'year' | 'genre';
-  value?: string | number;
 }
 
-const MediaSection: React.FC<MediaSectionProps> = ({ category, subCategory, value }) => {
-  const [items, setItems] = useState([]);
-  const [years, setYears] = useState([]);
-  const [genres, setGenres] = useState([]);
+const MediaSection: React.FC<MediaSectionProps> = ({ category }) => {
+  const [years, setYears] = useState<number[]>([]);
+  const [selectedYear, setSelectedYear] = useState<number | null>(null);
+  const [movies, setMovies] = useState<any[]>([]);
+  const [showYears, setShowYears] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (subCategory && value) {
-        const url = `/api/${category}/${value}?type=${subCategory}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        setItems(data);
-      } else if (subCategory === 'year') {
-        const yearsResponse = await fetch(`/api/years`);
-        const yearsData = await yearsResponse.json();
-        setYears(yearsData);
-      } else if (subCategory === 'genre') {
-        const genresResponse = await fetch(`/api/genres?category=${category}`);
-        const genresData = await genresResponse.json();
-        setGenres(genresData);
-      }
-    };
+    fetchYears();
+  }, []);
 
-    fetchData();
-  }, [category, subCategory, value]);
+  useEffect(() => {
+    if (selectedYear) {
+      fetchMovies(selectedYear);
+    }
+  }, [selectedYear]);
 
-  if (!subCategory) {
-    return (
-      <div className="grid grid-cols-2 gap-4">
-        <Link href={`/media/${category}/year`}>
-          <div className="p-2 bg-secondary-light dark:bg-primary-light rounded">Year</div>
-        </Link>
-        <Link href={`/media/${category}/genre`}>
-          <div className="p-2 bg-secondary-light dark:bg-primary-light rounded">Genre</div>
-        </Link>
-      </div>
-    );
-  }
+  const fetchYears = async () => {
+    try {
+      const response = await fetch('/api/years');
+      const data = await response.json();
+      setYears(data);
+    } catch (error) {
+      console.error('Failed to fetch years:', error);
+    }
+  };
 
-  if (subCategory === 'year' && !value) {
-    return (
-      <div className="grid grid-cols-4 gap-4">
-        {years.map((year) => (
-          <Link key={year} href={`/media/${category}/year/${year}`}>
-            <div className="p-2 bg-secondary-light dark:bg-primary-light rounded">{year}</div>
-          </Link>
-        ))}
-      </div>
-    );
-  }
-
-  if (subCategory === 'genre' && !value) {
-    return (
-      <div className="grid grid-cols-3 gap-4">
-        {genres.map((genre) => (
-          <Link key={genre.id} href={`/media/${category}/genre/${genre.id}`}>
-            <div className="p-2 bg-secondary-light dark:bg-primary-light rounded">{genre.name}</div>
-          </Link>
-        ))}
-      </div>
-    );
-  }
+  const fetchMovies = async (year: number) => {
+    try {
+      const response = await fetch(`/api/${category}/${year}?type=year`);
+      const data = await response.json();
+      setMovies(data);
+    } catch (error) {
+      console.error('Failed to fetch movies:', error);
+    }
+  };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {items.map((item) => (
-        <Link key={item.id} href={`/movie/${item.id}`}>
-          <div className="p-2 bg-secondary-light dark:bg-primary-light rounded">
-            <h3>{item.title || item.name}</h3>
-            <p>{item.release_date || item.first_air_date}</p>
+    <div>
+      <div 
+        onMouseEnter={() => setShowYears(true)}
+        onMouseLeave={() => setShowYears(false)}
+        onClick={() => setShowYears(!showYears)}
+        className="cursor-pointer p-2 bg-secondary-light dark:bg-primary-light rounded"
+      >
+        Year
+      </div>
+      {showYears && (
+        <div className="grid grid-cols-4 gap-4 mt-2">
+          {years.map((year) => (
+            <div 
+              key={year}
+              onClick={() => setSelectedYear(year)}
+              className="p-2 bg-secondary-light dark:bg-primary-light rounded cursor-pointer"
+            >
+              {year}
+            </div>
+          ))}
+        </div>
+      )}
+      {selectedYear && (
+        <div className="mt-4">
+          <h2 className="text-xl mb-2">Movies from {selectedYear}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {movies.map((movie) => (
+              <div key={movie.id} className="p-2 bg-secondary-light dark:bg-primary-light rounded">
+                <h3>{movie.title}</h3>
+                <p>{movie.release_date}</p>
+              </div>
+            ))}
           </div>
-        </Link>
-      ))}
+        </div>
+      )}
     </div>
   );
 };
