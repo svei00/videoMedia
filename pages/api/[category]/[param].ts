@@ -1,21 +1,25 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { category, param } = req.query;
-  const type = req.query.type as string;
+  const { category, param, type } = req.query;
   const apiKey = process.env.API_KEY;
+  let url;
+
+  const isMovie = category === 'movies';
 
   if (type === 'year') {
-    const url = `https://api.themoviedb.org/3/discover/${category === 'movies' ? 'movie' : 'tv'}?api_key=${apiKey}&primary_release_year=${param}`;
-
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      res.status(200).json(data.results);
-    } catch (error) {
-      res.status(500).json({ error: 'Failed to fetch data' });
-    }
+    url = `https://api.themoviedb.org/3/discover/${isMovie ? 'movie' : 'tv'}?api_key=${apiKey}&${isMovie ? 'primary_release_year' : 'first_air_date_year'}=${param}`;
+  } else if (type === 'genre') {
+    url = `https://api.themoviedb.org/3/discover/${isMovie ? 'movie' : 'tv'}?api_key=${apiKey}&with_genres=${param}`;
   } else {
-    res.status(400).json({ error: 'Invalid type' });
+    return res.status(400).json({ error: 'Invalid type' });
+  }
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    res.status(200).json(data.results);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch data' });
   }
 }

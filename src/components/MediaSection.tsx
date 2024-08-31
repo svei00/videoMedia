@@ -33,14 +33,13 @@ const MediaSection: React.FC<MediaSectionProps> = ({ category }) => {
 
   const fetchMedia = async (year: number) => {
     try {
-      const response = await fetch(`/api/${category}/${year}?type=year`);
+      const response = await fetch(`/api/media/${category}/${year}?type=year`);
       const data = await response.json();
       setMedia(data);
     } catch (error) {
       console.error(`Failed to fetch ${category}:`, error);
     }
   };
-
   return (
     <div className="relative">
       <div 
