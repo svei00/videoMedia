@@ -47,7 +47,7 @@ const MediaSection: React.FC<MediaSectionProps> = ({ category }) => {
         onMouseLeave={() => setShowYears(false)}
         className="cursor-pointer p-2 bg-secondary-light dark:bg-primary-light rounded"
       >
-        Year
+        Year1
       </div>
       {showYears && (
         <div className="absolute z-10 mt-2 bg-white dark:bg-gray-800 rounded shadow-lg">
