@@ -7,7 +7,7 @@ import { Suspense } from 'react';
 interface NavbarItemProps {
     title: string;
     param: string;
-    onClick?: (param: string) => void;
+    onClick?: () => void;
 }
 
 const NavbarItem = ({ title, param, onClick }: NavbarItemProps): JSX.Element => {
@@ -17,7 +17,7 @@ const NavbarItem = ({ title, param, onClick }: NavbarItemProps): JSX.Element => 
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (onClick) {
-      onClick(param);
+      onClick();
     }
   };
 
