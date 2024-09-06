@@ -48,8 +48,8 @@ export default function Navbar() {
         <NavbarItem title="Trending" param="fetchTrending" onClick={handleNavItemClick} />
         <NavbarItem title="Top Rated" param="fetchTopRated" onClick={handleNavItemClick} />
         <DropdownMenu
-          title="My Collection"
-          param="myCollection"
+          title="Watchlist"
+          param="watchlist"
           items={[
             { title: 'Series', param: 'mySeries', submenu: [
               { title: 'Year', param: 'mySeriesYear', onClick: () => handleMediaClick('series', 'year') },
