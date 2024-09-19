@@ -47,18 +47,20 @@ export default function Navbar() {
       title: 'Series', 
       address: '/watchlist/series', 
       Icon: FaTv,
+      param: 'series',
       submenu: [
-        { title: 'Year', address: '/watchlist/series/year', Icon: FaCalendarAlt, onClick: () => handleMediaClick('series', 'year') },
-        { title: 'Genre', address: '/watchlist/series/genre', Icon: FaTheaterMasks, onClick: () => handleMediaClick('series', 'genre') }
+        { title: 'Year', address: '/watchlist/series/year', Icon: FaCalendarAlt, param: 'year', onClick: () => handleMediaClick('series', 'year') },
+        { title: 'Genre', address: '/watchlist/series/genre', Icon: FaTheaterMasks, param: 'genre', onClick: () => handleMediaClick('series', 'genre') }
       ]
     },
     { 
       title: 'Movies', 
       address: '/watchlist/movies', 
       Icon: FaFilm,
+      param: 'movies',
       submenu: [
-        { title: 'Year', address: '/watchlist/movies/year', Icon: FaCalendarAlt, onClick: () => handleMediaClick('movies', 'year') },
-        { title: 'Genre', address: '/watchlist/movies/genre', Icon: FaTheaterMasks, onClick: () => handleMediaClick('movies', 'genre') }
+        { title: 'Year', address: '/watchlist/movies/year', Icon: FaCalendarAlt, param: 'year', onClick: () => handleMediaClick('movies', 'year') },
+        { title: 'Genre', address: '/watchlist/movies/genre', Icon: FaTheaterMasks, param: 'genre', onClick: () => handleMediaClick('movies', 'genre') }
       ]
     }
   ]
@@ -68,20 +70,22 @@ export default function Navbar() {
       title: 'Series', 
       address: '/media/series', 
       Icon: FaTv,
+      param: 'series',
       onClick: () => handleMediaClick('series'),
       submenu: [
-        { title: 'Year', address: '/media/series/year', Icon: FaCalendarAlt, onClick: () => handleMediaClick('series', 'year') },
-        { title: 'Genre', address: '/media/series/genre', Icon: FaTheaterMasks, onClick: () => handleMediaClick('series', 'genre') }
+        { title: 'Year', address: '/media/series/year', Icon: FaCalendarAlt, param: 'year', onClick: () => handleMediaClick('series', 'year') },
+        { title: 'Genre', address: '/media/series/genre', Icon: FaTheaterMasks, param: 'genre', onClick: () => handleMediaClick('series', 'genre') }
       ]
     },
     { 
       title: 'Movies', 
       address: '/media/movies', 
       Icon: FaFilm,
+      param: 'movies',
       onClick: () => handleMediaClick('movies'),
       submenu: [
-        { title: 'Year', address: '/media/movies/year', Icon: FaCalendarAlt, onClick: () => handleMediaClick('movies', 'year') },
-        { title: 'Genre', address: '/media/movies/genre', Icon: FaTheaterMasks, onClick: () => handleMediaClick('movies', 'genre') }
+        { title: 'Year', address: '/media/movies/year', Icon: FaCalendarAlt, param: 'year', onClick: () => handleMediaClick('movies', 'year') },
+        { title: 'Genre', address: '/media/movies/genre', Icon: FaTheaterMasks, param: 'genre', onClick: () => handleMediaClick('movies', 'genre') }
       ]
     }
   ]

@@ -6,11 +6,12 @@ export interface MenuItemProps {
   title: string,
   address: string,
   Icon: IconType,
+  param: string,  // Added this line
   onClick?: () => void,
   submenu?: MenuItemProps[]
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({title, address, Icon, onClick, submenu}) => {
+const MenuItem: React.FC<MenuItemProps> = ({title, address, Icon, param, onClick, submenu}) => {
   return (
     <div className="relative group">
       <Link href={address} className='hover:text-primary-light flex items-center' onClick={onClick}>
