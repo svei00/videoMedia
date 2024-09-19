@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 
 interface MediaSectionProps {
@@ -11,17 +11,7 @@ const MediaSection: React.FC<MediaSectionProps> = ({ category }) => {
   const [media, setMedia] = useState<any[]>([]);
   const [showYears, setShowYears] = useState(false);
 
-  useEffect(() => {
-    fetchYears();
-  }, []);
-
-  useEffect(() => {
-    if (selectedYear) {
-      fetchMedia(selectedYear);
-    }
-  }, [selectedYear, category]);
-
-  const fetchYears = async () => {
+  const fetchYears = useCallback(async () => {
     try {
       const response = await fetch('/api/years');
       const data = await response.json();
@@ -29,9 +19,9 @@ const MediaSection: React.FC<MediaSectionProps> = ({ category }) => {
     } catch (error) {
       console.error('Failed to fetch years:', error);
     }
-  };
+  }, []);
 
-  const fetchMedia = async (year: number) => {
+  const fetchMedia = useCallback(async (year: number) => {
     try {
       const response = await fetch(`/api/media/${category}/${year}?type=year`);
       const data = await response.json();
@@ -39,7 +29,18 @@ const MediaSection: React.FC<MediaSectionProps> = ({ category }) => {
     } catch (error) {
       console.error(`Failed to fetch ${category}:`, error);
     }
-  };
+  }, [category]);
+
+  useEffect(() => {
+    fetchYears();
+  }, [fetchYears]);
+
+  useEffect(() => {
+    if (selectedYear) {
+      fetchMedia(selectedYear);
+    }
+  }, [selectedYear, fetchMedia]);
+
   return (
     <div className="relative">
       <div 
