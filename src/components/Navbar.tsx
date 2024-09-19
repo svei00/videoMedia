@@ -3,12 +3,14 @@
 import React, { useState, useEffect } from 'react'
 import NavbarItem from './NavbarItem'
 import DropdownMenu from './DropdownMenu'
-import { FaArrowUp } from 'react-icons/fa'
+import { FaArrowUp, FaFilm, FaTv, FaCalendarAlt, FaTheaterMasks } from 'react-icons/fa'
 import MediaSection from './MediaSection'
+import { MenuItemProps } from './MenuItem'
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+  const [selectedMedia, setSelectedMedia] = useState<{ category?: 'series' | 'movies', subCategory?: 'year' | 'genre', value?: string | number } | null>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,12 +37,54 @@ export default function Navbar() {
     setOpenDropdown(null)
   }
 
-  const [selectedMedia, setSelectedMedia] = useState<{ category?: 'series' | 'movies', subCategory?: 'year' | 'genre', value?: string | number } | null>(null)
-
   const handleMediaClick = (category: 'series' | 'movies', subCategory?: 'year' | 'genre', value?: string | number) => {
     setSelectedMedia({ category, subCategory, value })
     setOpenDropdown(null)
   }
+
+  const watchlistItems: MenuItemProps[] = [
+    { 
+      title: 'Series', 
+      address: '/watchlist/series', 
+      Icon: FaTv,
+      submenu: [
+        { title: 'Year', address: '/watchlist/series/year', Icon: FaCalendarAlt, onClick: () => handleMediaClick('series', 'year') },
+        { title: 'Genre', address: '/watchlist/series/genre', Icon: FaTheaterMasks, onClick: () => handleMediaClick('series', 'genre') }
+      ]
+    },
+    { 
+      title: 'Movies', 
+      address: '/watchlist/movies', 
+      Icon: FaFilm,
+      submenu: [
+        { title: 'Year', address: '/watchlist/movies/year', Icon: FaCalendarAlt, onClick: () => handleMediaClick('movies', 'year') },
+        { title: 'Genre', address: '/watchlist/movies/genre', Icon: FaTheaterMasks, onClick: () => handleMediaClick('movies', 'genre') }
+      ]
+    }
+  ]
+
+  const mediaItems: MenuItemProps[] = [
+    { 
+      title: 'Series', 
+      address: '/media/series', 
+      Icon: FaTv,
+      onClick: () => handleMediaClick('series'),
+      submenu: [
+        { title: 'Year', address: '/media/series/year', Icon: FaCalendarAlt, onClick: () => handleMediaClick('series', 'year') },
+        { title: 'Genre', address: '/media/series/genre', Icon: FaTheaterMasks, onClick: () => handleMediaClick('series', 'genre') }
+      ]
+    },
+    { 
+      title: 'Movies', 
+      address: '/media/movies', 
+      Icon: FaFilm,
+      onClick: () => handleMediaClick('movies'),
+      submenu: [
+        { title: 'Year', address: '/media/movies/year', Icon: FaCalendarAlt, onClick: () => handleMediaClick('movies', 'year') },
+        { title: 'Genre', address: '/media/movies/genre', Icon: FaTheaterMasks, onClick: () => handleMediaClick('movies', 'genre') }
+      ]
+    }
+  ]
 
   return (
     <>
@@ -50,32 +94,14 @@ export default function Navbar() {
         <DropdownMenu
           title="Watchlist"
           param="watchlist"
-          items={[
-            { title: 'Series', param: 'mySeries', submenu: [
-              { title: 'Year', param: 'mySeriesYear', onClick: () => handleMediaClick('series', 'year') },
-              { title: 'Genre', param: 'mySeriesGenre', onClick: () => handleMediaClick('series', 'genre') }
-            ]},
-            { title: 'Movies', param: 'myMovies', submenu: [
-              { title: 'Year', param: 'myMoviesYear', onClick: () => handleMediaClick('movies', 'year') },
-              { title: 'Genre', param: 'myMoviesGenre', onClick: () => handleMediaClick('movies', 'genre') }
-            ]}
-          ]}
+          items={watchlistItems}
           isOpen={openDropdown === 'My Collection'}
           onToggle={() => handleDropdownToggle('My Collection')}
         />
         <DropdownMenu
           title="Media"
           param="media"
-          items={[
-            { title: 'Series', param: 'mediaSeries', onClick: () => handleMediaClick('series'), submenu: [
-              { title: 'Year', param: 'mediaSeriesYear', onClick: () => handleMediaClick('series', 'year') },
-              { title: 'Genre', param: 'mediaSeriesGenre', onClick: () => handleMediaClick('series', 'genre') }
-            ]},
-            { title: 'Movies', param: 'mediaMovies', onClick: () => handleMediaClick('movies'), submenu: [
-              { title: 'Year', param: 'mediaMoviesYear', onClick: () => handleMediaClick('movies', 'year') },
-              { title: 'Genre', param: 'mediaMoviesGenre', onClick: () => handleMediaClick('movies', 'genre') }
-            ]}
-          ]}
+          items={mediaItems}
           isOpen={openDropdown === 'Media'}
           onToggle={() => handleDropdownToggle('Media')}
         />
