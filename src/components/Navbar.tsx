@@ -10,7 +10,7 @@ import { MenuItemProps } from './MenuItem'
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
-  const [selectedMedia, setSelectedMedia] = useState<{ category: 'series' | 'movies', subCategory?: 'year' | 'genre', value?: string | number } | null>(null)
+  const [selectedMedia, setSelectedMedia] = useState<{ category: 'series' | 'movies', filterType?: 'year' | 'genre', filterValue?: string | number } | null>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,8 +37,8 @@ export default function Navbar() {
     setOpenDropdown(null)
   }
 
-  const handleMediaClick = (category: 'series' | 'movies', subCategory?: 'year' | 'genre', value?: string | number) => {
-    setSelectedMedia({ category, subCategory, value })
+  const handleMediaClick = (category: 'series' | 'movies', filterType?: 'year' | 'genre', filterValue?: string | number) => {
+    setSelectedMedia({ category, filterType, filterValue })
     setOpenDropdown(null)
   }
 
@@ -124,8 +124,8 @@ export default function Navbar() {
         <div className="mt-24">
           <MediaSection
             category={selectedMedia.category}
-            subCategory={selectedMedia.subCategory}
-            value={selectedMedia.value}
+            filterType={selectedMedia.filterType}
+            filterValue={selectedMedia.filterValue}
           />
         </div>
       )}
