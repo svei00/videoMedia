@@ -10,7 +10,7 @@ import { MenuItemProps } from './MenuItem'
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
-  const [selectedMedia, setSelectedMedia] = useState<{ category?: 'series' | 'movies', subCategory?: 'year' | 'genre', value?: string | number } | null>(null)
+  const [selectedMedia, setSelectedMedia] = useState<{ category: 'series' | 'movies', subCategory?: 'year' | 'genre', value?: string | number } | null>(null)
 
   useEffect(() => {
     const handleScroll = () => {
