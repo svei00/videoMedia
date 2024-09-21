@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "14.2.5",
+    "next": "^14.2.13",
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18",
@@ -29,8 +29,6 @@
     "typescript": "^5"
   },
   "engines": {
-  "node": ">=18.0.0"
+    "node": ">=18.0.0"
+  }
 }
-  
-}
-
