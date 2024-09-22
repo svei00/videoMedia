@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 
-interface MediaSectionProps {
+export interface MediaSectionProps {
   category: 'series' | 'movies';
+  filterType?: 'year' | 'genre';
+  filterValue?: string | number;
 }
 
-const MediaSection: React.FC<MediaSectionProps> = ({ category }) => {
+const MediaSection: React.FC<MediaSectionProps> = ({ category, filterType, filterValue }) => {
   const [years, setYears] = useState<number[]>([]);
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [media, setMedia] = useState<any[]>([]);
@@ -36,10 +38,13 @@ const MediaSection: React.FC<MediaSectionProps> = ({ category }) => {
   }, [fetchYears]);
 
   useEffect(() => {
-    if (selectedYear) {
+    if (filterType === 'year' && filterValue) {
+      setSelectedYear(Number(filterValue));
+      fetchMedia(Number(filterValue));
+    } else if (selectedYear) {
       fetchMedia(selectedYear);
     }
-  }, [selectedYear, fetchMedia]);
+  }, [selectedYear, fetchMedia, filterType, filterValue]);
 
   return (
     <div className="relative">
@@ -48,7 +53,7 @@ const MediaSection: React.FC<MediaSectionProps> = ({ category }) => {
         onMouseLeave={() => setShowYears(false)}
         className="cursor-pointer p-2 bg-secondary-light dark:bg-primary-light rounded"
       >
-        Year
+        {filterType === 'year' ? filterValue : 'Year'}
       </div>
       {showYears && (
         <div className="absolute z-10 mt-2 bg-white dark:bg-gray-800 rounded shadow-lg">
@@ -63,9 +68,11 @@ const MediaSection: React.FC<MediaSectionProps> = ({ category }) => {
           ))}
         </div>
       )}
-      {selectedYear && (
+      {(selectedYear || (filterType === 'year' && filterValue)) && (
         <div className="mt-4">
-          <h2 className="text-xl mb-2">{category === 'movies' ? 'Movies' : 'Series'} from {selectedYear}</h2>
+          <h2 className="text-xl mb-2">
+            {category === 'movies' ? 'Movies' : 'Series'} from {filterType === 'year' ? filterValue : selectedYear}
+          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {media.map((item) => (
               <div key={item.id} className="p-2 bg-secondary-light dark:bg-primary-light rounded">

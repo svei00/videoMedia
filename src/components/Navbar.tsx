@@ -4,13 +4,13 @@ import React, { useState, useEffect } from 'react'
 import NavbarItem from './NavbarItem'
 import DropdownMenu from './DropdownMenu'
 import { FaArrowUp, FaFilm, FaTv, FaCalendarAlt, FaTheaterMasks } from 'react-icons/fa'
-import MediaSection from './MediaSection'
+import MediaSection, { MediaSectionProps } from './MediaSection'
 import { MenuItemProps } from './MenuItem'
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
-  const [selectedMedia, setSelectedMedia] = useState<{ category: 'series' | 'movies', filterType?: 'year' | 'genre', filterValue?: string | number } | null>(null)
+  const [selectedMedia, setSelectedMedia] = useState<MediaSectionProps | null>(null)
 
   useEffect(() => {
     const handleScroll = () => {
