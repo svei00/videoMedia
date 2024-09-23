@@ -13,7 +13,7 @@ interface NavbarItemProps {
 const NavbarItem = ({ title, param, onClick }: NavbarItemProps): JSX.Element => {
   
   const searchParams = useSearchParams();
-  const genre = searchParams.get('genre');
+  const genre = searchParams?.get('genre') ?? null;
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (onClick) {
