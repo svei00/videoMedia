@@ -6,7 +6,7 @@ export interface MenuItemProps {
   title: string,
   address: string,
   Icon: IconType,
-  param: string,  // Added this line
+  param: string,
   onClick?: () => void,
   submenu?: MenuItemProps[]
 }
