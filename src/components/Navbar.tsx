@@ -4,13 +4,13 @@ import React, { useState, useEffect } from 'react'
 import NavbarItem from './NavbarItem'
 import DropdownMenu from './DropdownMenu'
 import { FaArrowUp, FaFilm, FaTv, FaCalendarAlt, FaTheaterMasks } from 'react-icons/fa'
+import MediaSection, { MediaSectionProps } from './MediaSection'
 import { MenuItemProps } from './MenuItem'
-import { useRouter } from 'next/navigation'
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
-  const router = useRouter()
+  const [selectedMedia, setSelectedMedia] = useState<MediaSectionProps | null>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,33 +37,30 @@ export default function Navbar() {
     setOpenDropdown(null)
   }
 
-  const handleMediaClick = (category: 'watchlist' | 'media', filterType?: 'year' | 'genre', filterValue?: string) => {
-    const query = new URLSearchParams({ category, ...(filterType && { filterType }), ...(filterValue && { filterValue }) })
-    router.push(`/?${query.toString()}`)
+  const handleMediaClick = (category: 'series' | 'movies', filterType?: 'year' | 'genre', filterValue?: string | number) => {
+    setSelectedMedia({ category, filterType, filterValue })
     setOpenDropdown(null)
   }
 
   const watchlistItems: MenuItemProps[] = [
     { 
       title: 'Series', 
-      address: '/?category=watchlist&filterType=series', 
+      address: '/watchlist/series', 
       Icon: FaTv,
       param: 'series',
-      onClick: () => handleMediaClick('watchlist', 'series'),
       submenu: [
-        { title: 'Year', address: '/?category=watchlist&filterType=year&filterValue=series', Icon: FaCalendarAlt, param: 'year', onClick: () => handleMediaClick('watchlist', 'year', 'series') },
-        { title: 'Genre', address: '/?category=watchlist&filterType=genre&filterValue=series', Icon: FaTheaterMasks, param: 'genre', onClick: () => handleMediaClick('watchlist', 'genre', 'series') }
+        { title: 'Year', address: '/watchlist/series/year', Icon: FaCalendarAlt, param: 'year', onClick: () => handleMediaClick('series', 'year') },
+        { title: 'Genre', address: '/watchlist/series/genre', Icon: FaTheaterMasks, param: 'genre', onClick: () => handleMediaClick('series', 'genre') }
       ]
     },
     { 
       title: 'Movies', 
-      address: '/?category=watchlist&filterType=movies', 
+      address: '/watchlist/movies', 
       Icon: FaFilm,
       param: 'movies',
-      onClick: () => handleMediaClick('watchlist', 'movies'),
       submenu: [
-        { title: 'Year', address: '/?category=watchlist&filterType=year&filterValue=movies', Icon: FaCalendarAlt, param: 'year', onClick: () => handleMediaClick('watchlist', 'year', 'movies') },
-        { title: 'Genre', address: '/?category=watchlist&filterType=genre&filterValue=movies', Icon: FaTheaterMasks, param: 'genre', onClick: () => handleMediaClick('watchlist', 'genre', 'movies') }
+        { title: 'Year', address: '/watchlist/movies/year', Icon: FaCalendarAlt, param: 'year', onClick: () => handleMediaClick('movies', 'year') },
+        { title: 'Genre', address: '/watchlist/movies/genre', Icon: FaTheaterMasks, param: 'genre', onClick: () => handleMediaClick('movies', 'genre') }
       ]
     }
   ]
@@ -71,24 +68,24 @@ export default function Navbar() {
   const mediaItems: MenuItemProps[] = [
     { 
       title: 'Series', 
-      address: '/?category=media&filterType=series', 
+      address: '/media/series', 
       Icon: FaTv,
       param: 'series',
-      onClick: () => handleMediaClick('media', 'series'),
+      onClick: () => handleMediaClick('series'),
       submenu: [
-        { title: 'Year', address: '/?category=media&filterType=year&filterValue=series', Icon: FaCalendarAlt, param: 'year', onClick: () => handleMediaClick('media', 'year', 'series') },
-        { title: 'Genre', address: '/?category=media&filterType=genre&filterValue=series', Icon: FaTheaterMasks, param: 'genre', onClick: () => handleMediaClick('media', 'genre', 'series') }
+        { title: 'Year', address: '/media/series/year', Icon: FaCalendarAlt, param: 'year', onClick: () => handleMediaClick('series', 'year') },
+        { title: 'Genre', address: '/media/series/genre', Icon: FaTheaterMasks, param: 'genre', onClick: () => handleMediaClick('series', 'genre') }
       ]
     },
     { 
       title: 'Movies', 
-      address: '/?category=media&filterType=movies', 
+      address: '/media/movies', 
       Icon: FaFilm,
       param: 'movies',
-      onClick: () => handleMediaClick('media', 'movies'),
+      onClick: () => handleMediaClick('movies'),
       submenu: [
-        { title: 'Year', address: '/?category=media&filterType=year&filterValue=movies', Icon: FaCalendarAlt, param: 'year', onClick: () => handleMediaClick('media', 'year', 'movies') },
-        { title: 'Genre', address: '/?category=media&filterType=genre&filterValue=movies', Icon: FaTheaterMasks, param: 'genre', onClick: () => handleMediaClick('media', 'genre', 'movies') }
+        { title: 'Year', address: '/media/movies/year', Icon: FaCalendarAlt, param: 'year', onClick: () => handleMediaClick('movies', 'year') },
+        { title: 'Genre', address: '/media/movies/genre', Icon: FaTheaterMasks, param: 'genre', onClick: () => handleMediaClick('movies', 'genre') }
       ]
     }
   ]
@@ -102,8 +99,8 @@ export default function Navbar() {
           title="Watchlist"
           param="watchlist"
           items={watchlistItems}
-          isOpen={openDropdown === 'Watchlist'}
-          onToggle={() => handleDropdownToggle('Watchlist')}
+          isOpen={openDropdown === 'My Collection'}
+          onToggle={() => handleDropdownToggle('My Collection')}
         />
         <DropdownMenu
           title="Media"
@@ -121,6 +118,16 @@ export default function Navbar() {
         >
           <FaArrowUp />
         </button>
+      )}
+
+      {selectedMedia && (
+        <div className="mt-24">
+          <MediaSection
+            category={selectedMedia.category}
+            filterType={selectedMedia.filterType}
+            filterValue={selectedMedia.filterValue}
+          />
+        </div>
       )}
     </>
   )
